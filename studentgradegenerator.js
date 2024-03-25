@@ -6,17 +6,9 @@ const rl = readline.createInterface({
 });
 
 // create a function showing the limitations of the marks input
-function limit (marks){
-    if (marks>=0 && marks <=100){
-        return grades(marks);
-    }
-    else{
-        return "Invalid Number";
-    }
-}
-
 // Use an If else statement to classify different input values
-function grades(marks){
+function studentGrades(marks){
+  if(marks >= 0 && marks <=100){
     if(marks > 79){
         return "A";
     }
@@ -32,9 +24,23 @@ function grades(marks){
     else{
         return "E";
     }
+  }else {
+    return "Invalid input, please put in a number within the range"
+  }
+
 }
 // use the readline question to get the user input
 rl.question('Please type in your marks ', (marks) => {
-    console.log(`You scored` + marks);
+    marks = parseFloat(marks) // converts number strings to integers
+
+    // Confirm that input is valid
+    const grade = studentGrades(marks)
+
+    // !isNaN = if input is a number
+    if(!isNaN(marks)){
+    console.log(`You scored` + ` ` + `${grade}`);
+    } else{
+        console.log("Invalid input, please put in a number")
+    }
     rl.close();
   });
